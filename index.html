@@ -125,8 +125,9 @@ if (window.DeviceMotionEvent != undefined) {
 		vy = vy * 0.97;
 		y1 = parseInt(y + vy / 50);
 		x1 = parseInt(x + vx / 50);
-		y = 526 - y1;  //document.documentElement.clientHeight
-		x = 302 - x1; //document.documentElement.clientWidth
+		
+		y = 546 - y1;  //document.documentElement.clientHeight
+		x = 322 + x1; //document.documentElement.clientWidth
 		
 		boundingBoxCheck();
 		
