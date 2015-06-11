@@ -123,8 +123,8 @@ if (window.DeviceMotionEvent != undefined) {
 		
 		vx = vx * 0.98;
 		vy = vy * 0.98;
-		y1 = parseInt(y + vy / 50)-20;
-		x1 = parseInt(x + vx / 50)-20;
+		y1 = parseInt(y + vy / 50);
+		x1 = parseInt(x + vx / 50);
 		y = document.documentElement.clientHeight - y1;  //document.documentElement.clientHeight
 		x = document.documentElement.clientWidth - x1; //document.documentElement.clientWidth
 		
