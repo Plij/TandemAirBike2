@@ -53,7 +53,7 @@ h1 {
 test: <span id="test"></span>
 </div>
 <!-- Scripts -->
-	<script src="jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="jquery-1.11.3.min.js" type="text/javascript"></script>
 	
 <script type="text/javascript">
 jQuery(document).ready(function(){
@@ -97,7 +97,6 @@ var x = 0, y = 0,
 	ax = 0, ay = 0;
 	
 var sphere = document.getElementById("sphere");
-
 if (window.DeviceMotionEvent != undefined) {
 	window.ondevicemotion = function(e) {
 		ax = event.accelerationIncludingGravity.x * 5;
@@ -105,29 +104,29 @@ if (window.DeviceMotionEvent != undefined) {
 		document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
 		document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
 		document.getElementById("accelerationZ").innerHTML = e.accelerationIncludingGravity.z;
-	if ( e.rotationRate ) {
-		document.getElementById("rotationAlpha").innerHTML = e.rotationRate.alpha;
-		document.getElementById("rotationBeta").innerHTML = e.rotationRate.beta;
-		document.getElementById("rotationGamma").innerHTML = e.rotationRate.gamma;
+		if ( e.rotationRate ) {
+			document.getElementById("rotationAlpha").innerHTML = e.rotationRate.alpha;
+			document.getElementById("rotationBeta").innerHTML = e.rotationRate.beta;
+			document.getElementById("rotationGamma").innerHTML = e.rotationRate.gamma;
+		}		
 	}
 	
 	setInterval( function() {
-		
-	
-		
-		//sphere draw
+		var landscapeOrientation = window.innerWidth/window.innerHeight > 1;
+		if ( landscapeOrientation) {
+			vx = vx + ay;
+			vy = vy + ax;
+		} else {
 			vy = vy - ay;
 			vx = vx + ax;
-		
+		}
 		vx = vx * 0.98;
 		vy = vy * 0.98;
-		y = parseInt(y + vy / 50);
-		x = parseInt(x + vx / 50);
+		y = parseInt(640 - y + vy / 50);
+		x = parseInt(360 - x + vx / 50);
+		alert("vy:" + vy + "y" + y);
 		
-		y = 640 - y;  //document.documentElement.clientHeight
-		x = 360  - x; // 
-		alert("" + y + " & " + x);
-		//boundingBoxCheck();
+		boundingBoxCheck();
 		
 		sphere.style.top = y + "px";
 		sphere.style.left = x + "px";
