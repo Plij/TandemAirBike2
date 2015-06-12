@@ -105,12 +105,7 @@ if (window.DeviceMotionEvent != undefined) {
 		document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
 		document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
 		document.getElementById("accelerationZ").innerHTML = e.accelerationIncludingGravity.z;
-
-		if ( e.rotationRate ) {
-			document.getElementById("rotationAlpha").innerHTML = e.rotationRate.alpha;
-			document.getElementById("rotationBeta").innerHTML = e.rotationRate.beta;
-			document.getElementById("rotationGamma").innerHTML = e.rotationRate.gamma;
-		}		
+		
 	}
 	
 	setInterval( function() {
@@ -121,15 +116,13 @@ if (window.DeviceMotionEvent != undefined) {
 			vy = vy - ay;
 			vx = vx + ax;
 		
-		vx = vx * 0.97;
-		vy = vy * 0.97;
+		vx = vx * 0.98;
+		vy = vy * 0.98;
 		y1 = parseInt(y + vy / 50);
 		x1 = parseInt(x + vx / 50);
 		
-		/* y = 547 - 2 * y1;  //document.documentElement.clientHeight
-		x = 323  - 2 * x1; // */
-		y= document.documentElement.clientHeight - y1;
-		x= document.documentElement.clientWidth - x1;
+		y = 547 - (547 - 2 * y);  //document.documentElement.clientHeight
+		x = 323 - (323  - 2 * x); // 
 		
 		//boundingBoxCheck();
 		
@@ -161,13 +154,13 @@ if (window.DeviceMotionEvent != undefined) {
 
 } 
 
-/*
+
 function boundingBoxCheck(){
 	if (x<0) { x = 0; vx = -vx; }
 	if (y<0) { y = 0; vy = -vy; }
 	if (x>document.documentElement.clientWidth-20) { x = document.documentElement.clientWidth-20; vx = -vx; }
 	if (y>document.documentElement.clientHeight-20) { y = document.documentElement.clientHeight-20; vy = -vy; }	
-	} */
+	} 
 
 //
 
