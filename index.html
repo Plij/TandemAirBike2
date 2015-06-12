@@ -120,10 +120,10 @@ if (window.DeviceMotionEvent != undefined) {
 		vy = vy * 0.98;
 		y1 = parseInt(y + vy / 50);
 		x1 = parseInt(x + vx / 50);
-		alert("" + y + " & " + x);
-		y = 547 - (547 - y);  //document.documentElement.clientHeight
-		x = 323 - (323  - x); // 
 		
+		y = 640 - (640 - y);  //document.documentElement.clientHeight
+		x = 360 - (360  - x); // 
+		alert("" + y + " & " + x);
 		//boundingBoxCheck();
 		
 		sphere.style.top = y + "px";
