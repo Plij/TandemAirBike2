@@ -38,12 +38,12 @@ h1 {
 
 <body>
 <div id="content">
-    <h1>TandemAirBike</h1>
+    <h1>Player2</h1>
     <div id="sphere"></div>
 	<div class="startButton"></div>
 <ul>
 	<li>acceleration x: <span id="accelerationX"></span>g</li>
-	<li>acceleration y: <span id="accelerationY"></span>g</li>
+	<li>acceleration y: <span id="accelerationY"></span>g</li> 
 	<li>acceleration z: <span id="accelerationZ"></span>g</li>
 
 </ul>
@@ -87,15 +87,18 @@ var startSingnal = 0;
 var x = 0, y = 0,
     vx = 0, vy = 0,
 	ax = 0, ay = 0;
+	scr = document.documentElement.clientWidth;
 	
 var sphere = document.getElementById("sphere");
 if (window.DeviceMotionEvent != undefined) {
 	window.ondevicemotion = function(e) {
 		ax = event.accelerationIncludingGravity.x * 5;
 		ay = event.accelerationIncludingGravity.y * 5;
-		document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
-		document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
-		document.getElementById("accelerationZ").innerHTML = e.accelerationIncludingGravity.z;
+		document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x; //mirror
+		document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y; //stays the same for player two
+		document.getElementById("accelerationZ").innerHTML = e.accelerationIncludingGravity.z; //mirror
+		x = parseInt(scr - x);
+		
 		if ( e.rotationRate ) {
 			document.getElementById("rotationAlpha").innerHTML = e.rotationRate.alpha;
 			document.getElementById("rotationBeta").innerHTML = e.rotationRate.beta;
@@ -114,8 +117,12 @@ if (window.DeviceMotionEvent != undefined) {
 		}
 		vx = vx * 0.98;
 		vy = vy * 0.98;
+		
 		y = parseInt(y + vy / 50);
-		x = parseInt(x + vx / 50);
+		
+		
+		player2x = scr - x;
+		alert("mirrorX:" + player2x + " X: " + x + "ScreenW: " + scr);
 		
 		boundingBoxCheck();
 		
@@ -126,7 +133,7 @@ if (window.DeviceMotionEvent != undefined) {
 		     var endpoint = "http://vm0063.virtues.fi/venues/142/";
                var data =  {
                      latitude: y,
-					 longitude: x
+					 longitude: player2x
                   }
 			   $.ajax({
                type: "PATCH",
@@ -141,13 +148,13 @@ if (window.DeviceMotionEvent != undefined) {
 				}).fail(function( jqXHR, textStatus ) {
                     alert("Sync failed: "+ textStatus);
                });
-		}, 1500);
+		}, 1000);
 		//sphere ends
 } 
 function boundingBoxCheck(){
 	if (x<0) { x = 0; vx = -vx; }
 	if (y<0) { y = 0; vy = -vy; }
-	if (x>document.documentElement.clientWidth-20) { x = document.documentElement.clientWidth-20; vx = -vx; }
+	if (x>document.documentElement.clientWidth-100) { x = document.documentElement.clientWidth-100; vx = -vx; }
 	if (y>document.documentElement.clientHeight-20) { y = document.documentElement.clientHeight-20; vy = -vy; }	
 	}
 //
