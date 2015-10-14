@@ -119,10 +119,11 @@ if (window.DeviceMotionEvent != undefined) {
 		vy = vy * 0.98;
 		
 		y = parseInt(y + vy / 50);
-		player2x = scr - x;
+		
 		
 		boundingBoxCheck();
 		
+		player2x = scr - x;
 		sphere.style.top = y + "px";
 		sphere.style.left = x + "px";
 		}, 25);
@@ -151,7 +152,7 @@ if (window.DeviceMotionEvent != undefined) {
 function boundingBoxCheck(){
 	if (x<0) { x = 0; vx = -vx; }
 	if (y<0) { y = 0; vy = -vy; }
-	if (x>document.documentElement.clientWidth-100) { x = document.documentElement.clientWidth-100; vx = -vx; }
+	if (x>document.documentElement.clientWidth-20) { x = document.documentElement.clientWidth-20; vx = -vx; }
 	if (y>document.documentElement.clientHeight-20) { y = document.documentElement.clientHeight-20; vy = -vy; }	
 	}
 //
