@@ -79,7 +79,7 @@ var startSingnal = 0;
                }).done(function( data ) {
 			   $( ".startButton" ).remove();
 				}).fail(function( jqXHR, textStatus ) {
-                    alert("Sync failed: "+ textStatus);
+                    alert("1st Sync failed: "+ textStatus);
                });
 			})		
 	
@@ -147,7 +147,7 @@ if (window.DeviceMotionEvent != undefined) {
                  }
                }).done(function( data ) {
 				}).fail(function( jqXHR, textStatus ) {
-                    alert("Sync failed: "+ textStatus);
+                    alert("2nd Sync failed: "+ textStatus);
                });
 		}, 1000);
 		//sphere ends
