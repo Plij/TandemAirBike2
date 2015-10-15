@@ -1,57 +1,119 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>TAB Player 2</title>
-<title>TAB_Player2</title>
+<title>TAB_Player1</title>
 <meta name="viewport" content="width=device-width,user-scalable=yes" />
 
 <style>
-@@ -15,9 +15,7 @@ body {
+body {
+	font-family: helvetica, arial, sans serif;
+}
+.startButton {
+	border: none;
+    background: url(start.png) no-repeat;
+    height: 320px;
     width: 320px;	
     z-index: 2;
 	position: absolute;
-
 }
-
 #sphere {
 	position: absolute;	
 	width: 100px;
-@@ -53,18 +51,14 @@ h1 {
+	height: 100px;
+	border-radius: 100px;
+	-webkit-radius: 100px;
+	background-color: green;
+	z-index: 0;
+}
+h1 {
+    text-align: center;
+    font-size: 1.4em;
+    margin: 0px auto;
+    padding: 0px 0px 5px 0px;  
+    width: 50%;
+    display:inline-block;
+}
+</style>
+</head>
+
+<body>
+<div id="content">
+    <h1>TandemAirBike</h1>
+    <div id="sphere"></div>
+	<div class="startButton"></div>
+<ul>
+	<li>acceleration x: <span id="accelerationX"></span>g</li>
+	<li>acceleration y: <span id="accelerationY"></span>g</li>
+	<li>acceleration z: <span id="accelerationZ"></span>g</li>
+
+</ul>
+
 test: <span id="test"></span>
 </div>
 <!-- Scripts -->
-<script src="jquery-1.11.3.min.js" type="text/javascript"></script>
 	<script src="jquery-1.11.3.min.js" type="text/javascript"></script>
 	
 <script type="text/javascript">
 jQuery(document).ready(function(){
-
 //TODO put this in a function
 //TODO do comparison calc
-
 //TODO touch input and button
-
 var startSingnal = 0;
-
 	$('.startButton').on("click", function() {  
 			    startSignal = 1;		
 				//send json to laptop	
-@@ -90,8 +84,6 @@ var startSingnal = 0;
+               var endpoint = "http://vm0063.virtues.fi/venues/141/";
+               var data =  {
+                     sprayinginitialized: 1 
+                  }
+			   $.ajax({
+               type: "PATCH",
+               url: endpoint,
+		       async: true, 
+               dataType: 'json',
+			   data: data,
+               beforeSend: function (xhr) {
+               //xhr.setRequestHeader ("Authorization", authorization);
+                 }
+               }).done(function( data ) {
+			   $( ".startButton" ).remove();
+				}).fail(function( jqXHR, textStatus ) {
+                    alert("Sync failed: "+ textStatus);
+               });
+			})		
 	
 //TODO 
 //CSS for colour change
-
-
 var x = 0, y = 0,
     vx = 0, vy = 0,
 	ax = 0, ay = 0;
-@@ -122,16 +114,14 @@ if (window.DeviceMotionEvent != undefined) {
+	
+var sphere = document.getElementById("sphere");
+if (window.DeviceMotionEvent != undefined) {
+	window.ondevicemotion = function(e) {
+		ax = event.accelerationIncludingGravity.x * 5;
+		ay = event.accelerationIncludingGravity.y * 5;
+		document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
+		document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
+		document.getElementById("accelerationZ").innerHTML = e.accelerationIncludingGravity.z;
+		if ( e.rotationRate ) {
+			document.getElementById("rotationAlpha").innerHTML = e.rotationRate.alpha;
+			document.getElementById("rotationBeta").innerHTML = e.rotationRate.beta;
+			document.getElementById("rotationGamma").innerHTML = e.rotationRate.gamma;
+		}		
+	}
+	
+	setInterval( function() {
+		var landscapeOrientation = window.innerWidth/window.innerHeight > 1;
+		if ( landscapeOrientation) {
+			vx = vx + ay;
+			vy = vy + ax;
+		} else {
+			vy = vy - ay;
+			vx = vx + ax;
 		}
 		vx = vx * 0.98;
 		vy = vy * 0.98;
-		y = parseInt(640 - y + vy / 50);
-		x = parseInt(360 - x + vx / 50);
-		alert("vy:" + vy + "y" + y);
 		y = parseInt(y + vy / 50);
 		x = parseInt(x + vx / 50);
 		
@@ -60,29 +122,38 @@ var x = 0, y = 0,
 		sphere.style.top = y + "px";
 		sphere.style.left = x + "px";
 		}, 25);
-		
 		setInterval( function() {
-		     var endpoint = "http://vm0063.virtues.fi/venues/142/";
+		     var endpoint = "http://vm0063.virtues.fi/venues/141/";
                var data =  {
-@@ -153,19 +143,14 @@ if (window.DeviceMotionEvent != undefined) {
+                     latitude: y,
+					 longitude: x
+                  }
+			   $.ajax({
+               type: "PATCH",
+               url: endpoint,
+		       async: true, 
+               dataType: 'json',
+			   data: data,
+               beforeSend: function (xhr) {
+               //xhr.setRequestHeader ("Authorization", authorization);
+                 }
+               }).done(function( data ) {
+				}).fail(function( jqXHR, textStatus ) {
+                    alert("Sync failed: "+ textStatus);
                });
 		}, 1500);
 		//sphere ends
-
 } 
-
-
 function boundingBoxCheck(){
 	if (x<0) { x = 0; vx = -vx; }
 	if (y<0) { y = 0; vy = -vy; }
 	if (x>document.documentElement.clientWidth-20) { x = document.documentElement.clientWidth-20; vx = -vx; }
 	if (y>document.documentElement.clientHeight-20) { y = document.documentElement.clientHeight-20; vy = -vy; }	
-	} 
-
 	}
 //
-
 })
 </script>
+	
+	
 </body>
 </html>
