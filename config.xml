@@ -4,7 +4,8 @@
     id              ="com.example.TAB"
     android:versionCode="1"
     android:versionName="1.0" >
-    
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+	<allow-navigation href="*" />
 	<name>TAB Player2</name>
 	
     <uses-sdk
@@ -20,9 +21,7 @@
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> 
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
     
-	<access origin="http://vm0063.virtues.fi/venues/*" />
-	<allow-navigation href="http://vm0063.virtues.fi/venues/*" />
-	<allow-intent href="http://vm0063.virtues.fi/venues/*" />
+	<access origin="*" />
 	
     <application
         android:allowBackup="true"
