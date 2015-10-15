@@ -121,6 +121,9 @@ if (window.DeviceMotionEvent != undefined) {
 		
 		boundingBoxCheck();
 		
+		screen = document.documentElement.clientWidth;//mirroring x
+		player2x = screen - x;
+		
 		sphere.style.top = y + "px";
 		sphere.style.left = x + "px";
 		}, 25);
@@ -128,7 +131,7 @@ if (window.DeviceMotionEvent != undefined) {
 		     var endpoint = "http://vm0063.virtues.fi/venues/142/";
                var data =  {
                      latitude: y,
-					 longitude: x
+					 longitude: player2x
                   }
 			   $.ajax({
                type: "PATCH",
