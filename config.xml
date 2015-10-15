@@ -5,7 +5,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
     
-	<name>Player2</name>
+	<name>TAB Player2</name>
 	
     <uses-sdk
         android:minSdkVersion="8"
@@ -15,9 +15,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> 
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" ></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> 
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-	
+    
 	
     <application
         android:allowBackup="true"
@@ -26,7 +28,7 @@
         android:theme="@style/AppTheme" >
     </application>
    
-    <description>TAndemAirBike.</description>
+    <description>TandemAirBike.</description>
 	
     <preference name="orientation" value="portrait"/>
     <preference name="autorotate" value="false" readonly="true"/>
