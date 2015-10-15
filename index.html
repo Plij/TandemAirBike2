@@ -58,7 +58,10 @@ jQuery(document).ready(function(){
 //TODO put this in a function
 //TODO do comparison calc
 //TODO touch input and button
+ $.support.cors=true;
+ $.mobile.allowCrossDomainPages = true;
 var startSingnal = 0;
+    
 	$('.startButton').on("click", function() {  
 			    startSignal = 1;		
 				//send json to laptop	
