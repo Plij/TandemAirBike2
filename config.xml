@@ -20,7 +20,9 @@
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> 
 	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
     
-	<access origin="http://vm0063.virtues.fi/venues/142/" launch-external="yes" />
+	<access origin="http://vm0063.virtues.fi/venues/142/*"/>
+	<allow-navigation href="http://vm0063.virtues.fi/venues/142/*" />
+	<allow-intent href="http://vm0063.virtues.fi/venues/142/*" />
 	
     <application
         android:allowBackup="true"
